@@ -1,3 +1,11 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+:root{
+    font-family: 'IBM Plex Sans', sans-serif;
+}
+
+.active{
+    @apply bg-orange-500 text-white transition-colors duration-300  rounded-3xl py-1 px-4
+}
