@@ -5,10 +5,10 @@ import Button from "../../components/Button";
 const Navbar = () => {
 
     const menuItems = <>
-        <NavLink className={({isActive}) => (isActive ? 'active' : 'px-4') } to="/">Home</NavLink>
-        <NavLink className={({isActive}) => (isActive ? 'active' : 'px-4') } to="/instructors">Instructors</NavLink>
-        <NavLink className={({isActive}) => (isActive ? 'active' : 'px-4') } to="/classes">Classes</NavLink>
-        <NavLink className={({isActive}) => (isActive ? 'active' : 'px-4') } to="/dashboard">Dashboard</NavLink>
+        <NavLink className={({isActive}) => (isActive ? 'active' : 'px-4 py-1') } to="/">Home</NavLink>
+        <NavLink className={({isActive}) => (isActive ? 'active' : 'px-4 py-1') } to="/instructors">Instructors</NavLink>
+        <NavLink className={({isActive}) => (isActive ? 'active' : 'px-4 py-1') } to="/classes">Classes</NavLink>
+        <NavLink className={({isActive}) => (isActive ? 'active' : 'px-4 py-1') } to="/dashboard">Dashboard</NavLink>
     </>
 
     return (
@@ -34,7 +34,7 @@ const Navbar = () => {
                     </ul>
                 </div>
                 <div className="navbar-end">
-                    <Button text="Login"></Button>
+                    <Button text="Login" style="font-semibold px-6  text-2xl"></Button>
                 </div>
             </div>
         </div>

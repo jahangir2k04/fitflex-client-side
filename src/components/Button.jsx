@@ -1,8 +1,8 @@
 
 
-const Button = ({text}) => {
+const Button = ({text, style}) => {
     return (
-        <button className="bg-orange-500 text-white py-2 px-6 rounded-lg text-2xl font-semibold tracking-wider">{text}</button>
+        <button className={`bg-orange-500 text-white py-2 rounded-lg tracking-wider ${style}`}>{text}</button>
     );
 };
 
