@@ -1,19 +1,31 @@
 import { Player } from '@lottiefiles/react-lottie-player';
-import { Link } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import bgImg from '../../../public/bgImg.png'
 import SocialLogin from '../../components/SocialLogin';
 import { useForm } from 'react-hook-form';
 import { FaEye, FaEyeSlash } from 'react-icons/fa';
-import { useState } from 'react';
+import { useContext, useState } from 'react';
+import { AuthContext } from '../../providers/AuthProvider';
 
 
 const Login = () => {
 
-    const [showPassword, setShowPassword] = useState(false);
+    const { signIn } = useContext(AuthContext);
     const { register, handleSubmit, formState: { errors } } = useForm();
+    const [showPassword, setShowPassword] = useState(false);
+    const [error, setError] = useState('');
+    const navigate = useNavigate();
+    const location = useLocation();
+    const from = location.state?.from?.pathname || '/';
 
-    const onSubmit = async (data) => {
-        console.log(data)
+    const onSubmit = (data) => {
+        signIn(data.email, data.password)
+            .then(result => {
+                const loggedUser = result.user;
+                console.log(loggedUser);
+                navigate(from, { replace: true })
+            })
+            .catch(() => setError("Invalid email or password."))
     }
 
 
@@ -47,18 +59,19 @@ const Login = () => {
                             </label>
                             <div className='input-group'>
                                 <input {...register("password", { required: true })} type={showPassword ? "text" : "password"} placeholder="enter your password" className="input input-bordered w-full" />
-                                
-                                <button onClick={() => setShowPassword(!showPassword)} 
-                                className='px-4 text-xl bg-white'
-                                type='button'
-                                >{ showPassword ? <FaEye title='hide' /> : <FaEyeSlash title='show' />}</button>
+
+                                <button onClick={() => setShowPassword(!showPassword)}
+                                    className='px-4 text-xl bg-white'
+                                    type='button'
+                                >{showPassword ? <FaEye title='hide' /> : <FaEyeSlash title='show' />}</button>
                             </div>
                             {errors.password && <span className='text-red-600'>* Password is required</span>}
                         </div>
-                        
+
                         <div className="form-control mt-6">
                             <input className="btn bg-orange-500 hover:bg-orange-500 text-white tracking-wider text-xl normal-case" type="submit" value="Login" />
                         </div>
+                        <p className='text-red-600'>{error}</p>
                     </form>
                     <SocialLogin></SocialLogin>
                     <p className='text-center'><span>New Here? </span> <Link to="/signup" className='font-bold text-orange-500'>Create An Account</Link></p>

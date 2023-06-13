@@ -1,16 +1,33 @@
 import { Player } from '@lottiefiles/react-lottie-player';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import bgImg from '../../../public/bgImg.png'
 import SocialLogin from '../../components/SocialLogin';
 import { useForm } from 'react-hook-form';
+import { useContext } from 'react';
+import { AuthContext } from '../../providers/AuthProvider';
 
 
 const SignUp = () => {
 
-    const { register, handleSubmit, watch, formState: { errors } } = useForm();
+    const { createUser, updateUserProfile } = useContext(AuthContext);
+    const { register, handleSubmit, reset, watch, formState: { errors } } = useForm();
+    const navigate = useNavigate();
 
-    const onSubmit = async (data) => {
-        console.log(data)
+    const onSubmit = (data) => {
+        createUser(data.email, data.password)
+            .then(result => {
+                const createdUser = result.user;
+                console.log(createdUser);
+                updateUserProfile(data.name, data.photo)
+                .then(result => {
+                    const updatedUser = result.user;
+                    console.log(updatedUser);
+                    reset();
+                    navigate('/');
+                })
+                .catch(() => {})
+            })
+            .catch(() => { })
     }
 
     const password = watch('password');
@@ -29,7 +46,7 @@ const SignUp = () => {
                     </Player>
                 </div>
                 <div className="card w-full md:w-1/2 md:max-w-sm">
-                    <h3 className='text-5xl font-bold text-center text-orange-500'>Please Login</h3>
+                    <h3 className='text-5xl font-bold text-center text-orange-500'>Please Sign Up</h3>
                     <form onSubmit={handleSubmit(onSubmit)} className="card-body px-0 pb-2">
 
                         <div className="form-control">
@@ -88,7 +105,8 @@ const SignUp = () => {
                             <label className="label">
                                 <span className="label-text text-base">Photo URL</span>
                             </label>
-                            <input  {...register("photo", { required: true })}
+                            {/* TODO photo require */}
+                            <input  {...register("photo", { required: false })}
                                 type="file" className="file-input file-input-bordered w-full max-w-sm" />
                             {errors.photo && <span className='text-red-600 mt-1'>* Photo is required</span>}
                         </div>
