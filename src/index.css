@@ -2,6 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 
+
 :root{
     font-family: 'IBM Plex Sans', sans-serif;
 }
@@ -13,3 +14,4 @@
 .footer-bg{
     background-image: url('/footer-bg.svg');
 }
+
