@@ -12,13 +12,13 @@ const ManageUser = () => {
         return res.data;
     })
 
-    const handleMakeAdmin = (user, role) => {
+    const handleAdminOrInstructor = (user, role) => {
         fetch(`http://localhost:5000/users/admin/${user._id}`, {
             method: 'PATCH',
             headers: {
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify({ role: role })
+            body: JSON.stringify({ role })
         })
             .then(res => res.json())
             .then(data => {
@@ -62,7 +62,7 @@ const ManageUser = () => {
                                         <td>{user.email}</td>
                                         <td>{user.role}</td>
                                         <td>
-                                            <button onClick={() => handleMakeAdmin(user, "admin")}
+                                            <button onClick={() => handleAdminOrInstructor(user, "admin")}
                                                 disabled={user?.role === 'admin'}
                                                 className="btn border-none hover:bg-orange-500 normal-case text-white bg-orange-500 btn-sm">
                                                 Make Admin
@@ -70,7 +70,7 @@ const ManageUser = () => {
                                         </td>
                                         <td>
                                             <button
-                                                onClick={() => handleMakeAdmin(user, "instructor")}
+                                                onClick={() => handleAdminOrInstructor(user, "instructor")}
                                                 disabled={
                                                     user?.role === 'admin' || user?.role === 'instructor'
                                                 }
