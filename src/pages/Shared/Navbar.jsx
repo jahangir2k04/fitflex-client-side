@@ -2,20 +2,27 @@ import { Link, NavLink } from "react-router-dom";
 import Button from "../../components/Button";
 import { useContext } from "react";
 import { AuthContext } from "../../providers/AuthProvider";
+import useAdmin from "../../hooks/useAdmin";
+import useInstructor from "../../hooks/useInstructor";
 
 
 const Navbar = () => {
 
     const { user, logOut } = useContext(AuthContext);
-    const isAdmin = true;
-    const isInstructor = false;
-    
+    const [isAdmin] = useAdmin();
+    const [isInstructor] = useInstructor();
+
 
     const menuItems = <>
         <NavLink className={({ isActive }) => (isActive ? 'my-active' : 'px-4 py-1')} to="/">Home</NavLink>
         <NavLink className={({ isActive }) => (isActive ? 'my-active' : 'px-4 py-1')} to="/instructors">Instructors</NavLink>
         <NavLink className={({ isActive }) => (isActive ? 'my-active' : 'px-4 py-1')} to="/classes">Classes</NavLink>
-        <NavLink className={({ isActive }) => (isActive ? 'my-active' : 'px-4 py-1')} to={`/dashboard/${isAdmin ? 'admin-home' : isInstructor? 'instructor-home' : 'student-home'}`}>Dashboard</NavLink>
+        <NavLink className={({ isActive }) => (isActive ? 'my-active' : 'px-4 py-1')} to={isAdmin ? 
+            "/dashboard/admin-home" : 
+            isInstructor ? 
+            "/dashboard/instructor-home" : 
+            "/dashboard/student-home"
+        }>Dashboard</NavLink>
     </>
 
     const handleLogOut = () => {

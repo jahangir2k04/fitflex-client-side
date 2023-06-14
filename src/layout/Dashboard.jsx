@@ -3,12 +3,14 @@ import Navbar from "../pages/Shared/Navbar";
 import { AiFillHome } from 'react-icons/ai'
 import { FaUsers, FaCheckCircle, FaPlusCircle, FaBookReader, FaBook } from "react-icons/fa";
 import { FiMenu } from "react-icons/fi";
+import useAdmin from "../hooks/useAdmin";
+import useInstructor from "../hooks/useInstructor";
 
 
 const Dashboard = () => {
 
-    const isAdmin = true;
-    const isInstructor = false;
+    const [isAdmin] = useAdmin();
+    const [isInstructor] = useInstructor();
 
     return (
         <div>
