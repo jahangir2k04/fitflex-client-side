@@ -7,8 +7,8 @@ import { AuthContext } from "../../providers/AuthProvider";
 const Navbar = () => {
 
     const { user, logOut } = useContext(AuthContext);
-    const isAdmin = false;
-    const isInstructor = true;
+    const isAdmin = true;
+    const isInstructor = false;
     
 
     const menuItems = <>

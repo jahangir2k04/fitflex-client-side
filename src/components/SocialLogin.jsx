@@ -1,32 +1,32 @@
 import { useContext } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
 import { AuthContext } from "../providers/AuthProvider";
-// import { useLocation, useNavigate } from "react-router-dom";
 
 
 const SocialLogin = () => {
 
     const { googleSignIn } = useContext(AuthContext);
-    // const navigate = useNavigate();
-    // const location = useLocation();
-    // const from = location.state?.from?.pathname || '/';
+    const navigate = useNavigate();
+    const location = useLocation();
+    const from = location.state?.from?.pathname || '/';
 
     const handleSocialLogin = () => {
         googleSignIn()
             .then(result => {
                 const loggedUser = result.user;
                 console.log(loggedUser);
-                // const saveUser = { name: loggedUser.displayName, email: loggedUser.email }
-                // fetch('https://bistro-boss-server-tau-dusky.vercel.app/users', {
-                //     method: 'POST',
-                //     headers: {
-                //         "content-type": "application/json"
-                //     },
-                //     body: JSON.stringify(saveUser)
-                // })
-                //     .then(res => res.json())
-                //     .then(() => {
-                //         navigate(from, {replace: true})
-                //     })
+                const saveUser = { name: loggedUser?.displayName, email: loggedUser.email }
+                fetch('http://localhost:5000/users', {
+                    method: 'POST',
+                    headers: {
+                        "content-type": "application/json"
+                    },
+                    body: JSON.stringify(saveUser)
+                })
+                    .then(res => res.json())
+                    .then(() => {
+                        navigate(from, {replace: true})
+                    })
             })
     }
 

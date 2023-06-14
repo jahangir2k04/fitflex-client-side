@@ -3,13 +3,34 @@ import { useForm } from "react-hook-form";
 import { AuthContext } from "../../../providers/AuthProvider";
 
 
+const image_hosting_token = import.meta.env.VITE_Image_Upload_Token;
+
 const AddClass = () => {
 
     const { user } = useContext(AuthContext);
     const { register, handleSubmit } = useForm();
+    const image_hosting_url = `https://api.imgbb.com/1/upload?key=${image_hosting_token}`
 
     const onSubmit = data => {
+
+        const formData = new FormData();
+        formData.append('image', data.image[0]);
+        fetch(image_hosting_url, {
+            method: "POST",
+            body: formData
+        })
+            .then(res => res.json())
+            .then(imgResponse => {
+                if (imgResponse) {
+                    const imgURL = imgResponse.data.display_url;
+                    const { className, instructorName, seats, price } = data;
+                    const newClass = { className, image: imgURL, instructorName, email: user?.email, seats, price: parseFloat(price), status: 'pending'};
+                    console.log(newClass);
+                }
+            })
+
         console.log(data);
+
     }
 
     return (
@@ -28,7 +49,7 @@ const AddClass = () => {
                     </div>
 
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                        {/* <div className="form-control w-full mb-6">
+                        <div className="form-control w-full mb-6">
                             <label className="label">
                                 <span className="label-text font-semibold">Instructor Name*</span>
                             </label>
@@ -37,7 +58,7 @@ const AddClass = () => {
                                 type="text" readOnly
                                 defaultValue={user?.displayName}
                                 className="input input-bordered w-full" />
-                        </div> */}
+                        </div>
                         <div className="form-control w-full mb-6">
                             <label className="label">
                                 <span className="label-text font-semibold">Email*</span>
@@ -75,9 +96,8 @@ const AddClass = () => {
                         <label className="label">
                             <span className="label-text font-semibold">Class Image*</span>
                         </label>
-                        {/* TODO: require true */}
                         <input type="file"
-                            {...register("image", { required: false })}
+                            {...register("image", { required: true })}
                             className="file-input file-input-bordered w-full max-w-xs" />
                     </div>
                     <div className="text-center">
