@@ -18,7 +18,7 @@ const ManageUser = () => {
             headers: {
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify({role: role})
+            body: JSON.stringify({ role: role })
         })
             .then(res => res.json())
             .then(data => {
@@ -63,16 +63,18 @@ const ManageUser = () => {
                                         <td>{user.role}</td>
                                         <td>
                                             <button onClick={() => handleMakeAdmin(user, "admin")}
-                                            disabled={user?.role === 'admin'}
-                                            className="btn border-none hover:bg-orange-500 normal-case text-white bg-orange-500 btn-sm">
+                                                disabled={user?.role === 'admin'}
+                                                className="btn border-none hover:bg-orange-500 normal-case text-white bg-orange-500 btn-sm">
                                                 Make Admin
                                             </button>
                                         </td>
                                         <td>
-                                            <button 
-                                            onClick={() => handleMakeAdmin(user, "instructor")}
-                                            disabled={user?.role === 'instructor'}
-                                            className="btn border-none hover:bg-orange-500 normal-case text-white bg-orange-500 btn-sm">
+                                            <button
+                                                onClick={() => handleMakeAdmin(user, "instructor")}
+                                                disabled={
+                                                    user?.role === 'admin' || user?.role === 'instructor'
+                                                }
+                                                className="btn border-none hover:bg-orange-500 normal-case text-white bg-orange-500 btn-sm">
                                                 Make Instructor
                                             </button>
                                         </td>
