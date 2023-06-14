@@ -9,10 +9,10 @@ const Navbar = () => {
     const { user, logOut } = useContext(AuthContext);
 
     const menuItems = <>
-        <NavLink className={({ isActive }) => (isActive ? 'active' : 'px-4 py-1')} to="/">Home</NavLink>
-        <NavLink className={({ isActive }) => (isActive ? 'active' : 'px-4 py-1')} to="/instructors">Instructors</NavLink>
-        <NavLink className={({ isActive }) => (isActive ? 'active' : 'px-4 py-1')} to="/classes">Classes</NavLink>
-        <NavLink className={({ isActive }) => (isActive ? 'active' : 'px-4 py-1')} to="/dashboard">Dashboard</NavLink>
+        <NavLink className={({ isActive }) => (isActive ? 'my-active' : 'px-4 py-1')} to="/">Home</NavLink>
+        <NavLink className={({ isActive }) => (isActive ? 'my-active' : 'px-4 py-1')} to="/instructors">Instructors</NavLink>
+        <NavLink className={({ isActive }) => (isActive ? 'my-active' : 'px-4 py-1')} to="/classes">Classes</NavLink>
+        <NavLink className={({ isActive }) => (isActive ? 'my-active' : 'px-4 py-1')} to="/dashboard">Dashboard</NavLink>
     </>
 
     const handleLogOut = () => {
