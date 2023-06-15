@@ -2,7 +2,7 @@
 
 const Loader = () => {
     return (
-        <div className=" bg-slate-400">
+        <div className="h-screen flex justify-center items-center">
             <span className="loading loading-infinity loading-lg"></span>
         </div>
     );

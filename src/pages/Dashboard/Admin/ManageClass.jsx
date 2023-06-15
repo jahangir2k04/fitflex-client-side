@@ -1,18 +1,21 @@
-import { useQuery } from "@tanstack/react-query";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import Swal from "sweetalert2";
 import { useState } from "react";
+import useClass from "../../../hooks/useClass";
+import Loader from "../../../components/Loader";
 
 
 const ManageClass = () => {
 
     const [axiosSecure] = useAxiosSecure();
-    const [classItem, setClassItem] = useState([]);
+    const [classItem, setClassItem] = useState({});
 
-    const { data: classes = [], refetch } = useQuery(['classes'], async () => {
-        const res = await axiosSecure.get('/classes');
-        return res.data;
-    })
+    // const { data: classes = [], refetch } = useQuery(['classes'], async () => {
+    //     const res = await axiosSecure.get('/classes');
+    //     return res.data;
+    // })
+
+    const [classes, refetch, isLoading] = useClass();
 
     const handleStatus = (item, status) => {
         axiosSecure.patch(`/classes/status/${item._id}`, { status })
@@ -50,6 +53,10 @@ const ManageClass = () => {
         event.target.reset();
     }
 
+    if(isLoading){
+        return <Loader></Loader>
+    }
+
 
     return (
         <div className=" h-full px-6 py-10">
@@ -59,8 +66,9 @@ const ManageClass = () => {
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                     {
                         classes.map(item =>
+
                             <div key={item._id} className="w-80 bg-base-100 shadow-xl">
-                                <figure><img className="h-48 w-full" src={item.image} alt="Shoes" /></figure>
+                                <figure><img className="h-48 w-full" src={item.image} alt="Photo" /></figure>
                                 <div className="card-body p-6">
                                     <h2 className="card-title">{item.className}</h2>
                                     <h2>Instructor: {item.instructorName}</h2>
@@ -78,10 +86,10 @@ const ManageClass = () => {
                                         <button
                                             onClick={() => handleStatus(item, 'denied')}
                                             disabled={item.status !== 'pending'}
-                                            className="btn w-32 border-none hover:bg-orange-500 normal-case text-white bg-orange-500 btn-sm">Deny</button>
+                                            className="btn w-32 rounded-none border-none hover:bg-orange-500 normal-case text-white bg-orange-500 btn-sm">Deny</button>
 
                                         <button
-                                            disabled={item.status !== 'pending'}
+                                            disabled={item.status !== 'denied'}
                                             className="btn rounded-none w-32 border-none hover:bg-orange-500 normal-case text-white bg-orange-500 btn-sm text-base"
                                             onClick={() => {
                                                 window.my_modal_5.showModal()
@@ -90,7 +98,7 @@ const ManageClass = () => {
 
                                     </div>
                                 </div>
-                            </div>)
+                            </div> )
                     }
                 </div>
 

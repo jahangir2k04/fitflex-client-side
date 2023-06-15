@@ -8,9 +8,9 @@ const MyClass = () => {
 
     const { user } = useContext(AuthContext);
     const [axiosSecure] = useAxiosSecure();
-    const {feedback, setFeedback} = useState('');
+    const [feedbackText, setFeedbackTex] = useState('');
 
-    const { data: myClasses = [], refetch } = useQuery({
+    const { data: myClasses = [] } = useQuery({
         queryKey: ['my-class', user?.email ? user?.email : ''],
         enabled: !!user?.email && !!localStorage.getItem("fitflex-access-token"),
         queryFn: async () => {
@@ -61,19 +61,16 @@ const MyClass = () => {
                                         <td>
                                             <button
                                                 onClick={() => {
+                                                    setFeedbackTex(myClass.feedback);
                                                     window.my_modal_5.showModal()
-                                                    setFeedback(myClass.feedback)
                                                 }}
-                                                disabled={myClass.status !== 'denied'}
+                                                // disabled={myClass.status !== 'denied'}
                                                 className="btn w-full border-none hover:bg-orange-500 normal-case text-white bg-orange-500 btn-sm">
                                                 See
                                             </button>
                                         </td>
                                         <td>
-                                            <button
-
-
-                                                className="btn w-full border-none hover:bg-orange-500 normal-case text-white bg-orange-500 btn-sm">
+                                            <button className="btn w-full border-none hover:bg-orange-500 normal-case text-white bg-orange-500 btn-sm">
                                                 Update
                                             </button>
                                         </td>
@@ -86,7 +83,7 @@ const MyClass = () => {
                 <dialog id="my_modal_5" className="modal modal-bottom sm:modal-middle">
                     <form method="dialog" className="modal-box">
                         <h3 className="font-bold text-lg">Feedback!</h3>
-                        <p className="py-4">{}</p>
+                        <p className="py-4">{feedbackText || 'No Feedback yet'}</p>
                         <div className="modal-action">
                             {/* if there is a button in form, it will close the modal */}
                             <button
