@@ -20,9 +20,7 @@ const Login = () => {
 
     const onSubmit = (data) => {
         signIn(data.email, data.password)
-            .then(result => {
-                const loggedUser = result.user;
-                console.log(loggedUser);
+            .then(() => {
                 navigate(from, { replace: true })
             })
             .catch(() => setError("Invalid email or password."))

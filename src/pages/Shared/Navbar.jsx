@@ -17,12 +17,14 @@ const Navbar = () => {
         <NavLink className={({ isActive }) => (isActive ? 'my-active' : 'px-4 py-1')} to="/">Home</NavLink>
         <NavLink className={({ isActive }) => (isActive ? 'my-active' : 'px-4 py-1')} to="/instructors">Instructors</NavLink>
         <NavLink className={({ isActive }) => (isActive ? 'my-active' : 'px-4 py-1')} to="/classes">Classes</NavLink>
-        <NavLink className={({ isActive }) => (isActive ? 'my-active' : 'px-4 py-1')} to={isAdmin ? 
-            "/dashboard/admin-home" : 
-            isInstructor ? 
-            "/dashboard/instructor-home" : 
-            "/dashboard/student-home"
-        }>Dashboard</NavLink>
+        {user &&
+            <NavLink className={({ isActive }) => (isActive ? 'my-active' : 'px-4 py-1')}
+                to={isAdmin ?
+                        "/dashboard/admin-home" :
+                    isInstructor ?
+                        "/dashboard/instructor-home" :
+                        "/dashboard/student-home"
+                }>Dashboard</NavLink>}
     </>
 
     const handleLogOut = () => {

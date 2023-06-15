@@ -9,16 +9,17 @@ import SignUp from "../pages/SignkUp/SignUp";
 import Dashboard from "../layout/Dashboard";
 import AdminHome from "../pages/Dashboard/Admin/AdminHome";
 import InstructorHome from "../pages/Dashboard/Instructor/InstructorHome";
-import StudentHome from "../pages/Dashboard/Studend/StudentHome";
+import StudentHome from "../pages/Dashboard/Student/StudentHome";
 import ManageUser from "../pages/Dashboard/Admin/ManageUser";
 import ManageClass from "../pages/Dashboard/Admin/ManageClass";
-import SelectedClass from "../pages/Dashboard/Studend/SelectedClass";
-import EnrolledClass from "../pages/Dashboard/Studend/EnrolledClass";
+import SelectedClass from "../pages/Dashboard/Student/SelectedClass";
+import EnrolledClass from "../pages/Dashboard/Student/EnrolledClass";
 import MyClass from "../pages/Dashboard/Instructor/MyClass";
 import AddClass from "../pages/Dashboard/Instructor/AddClass";
 import PrivateRoute from "./PrivateRoute";
 import InstructorRoute from "./InstructorRoute";
 import AdminRoute from "./AdminRoute";
+import StudentRoute from "./StudentRoute";
 
 
 export const router = createBrowserRouter([
@@ -60,15 +61,15 @@ export const router = createBrowserRouter([
             // student related route
             {
                 path: 'student-home',
-                element: <StudentHome></StudentHome>
+                element: <StudentRoute><StudentHome></StudentHome></StudentRoute>
             },
             {
                 path: 'selected-class',
-                element: <SelectedClass></SelectedClass>
+                element: <StudentRoute><SelectedClass></SelectedClass></StudentRoute>
             },
             {
                 path: 'enrolled-class',
-                element: <EnrolledClass></EnrolledClass>
+                element: <StudentRoute><EnrolledClass></EnrolledClass></StudentRoute>
             },
 
 

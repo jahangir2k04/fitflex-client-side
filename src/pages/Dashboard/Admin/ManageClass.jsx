@@ -32,7 +32,7 @@ const ManageClass = () => {
 
     const handleFeedback = event => {
         const feedbackText = event.target.feedback.value;
-        
+
         axiosSecure.patch(`/classes/feedback/${classItem._id}`, { feedbackText })
             .then(res => {
                 if (res.data.modifiedCount) {
@@ -71,16 +71,18 @@ const ManageClass = () => {
                                         <p>Status : <span className="font-bold">{item.status}</span></p>
                                         <button
                                             onClick={() => handleStatus(item, 'approved')}
-                                            disabled={item.status === 'approved' || item.status === 'denied'}
+                                            disabled={item.status !== 'pending'}
                                             className="btn btn-sm border bg-white border-orange-500 normal-case">Approve</button>
                                     </div>
                                     <div className="flex justify-between mt-2">
                                         <button
                                             onClick={() => handleStatus(item, 'denied')}
-                                            disabled={item.status === 'approved' || item.status === 'denied'}
+                                            disabled={item.status !== 'pending'}
                                             className="btn w-32 border-none hover:bg-orange-500 normal-case text-white bg-orange-500 btn-sm">Deny</button>
 
-                                        <button className="btn w-32 border-none hover:bg-orange-500 normal-case text-white bg-orange-500 btn-sm text-base"
+                                        <button
+                                            disabled={item.status !== 'pending'}
+                                            className="btn rounded-none w-32 border-none hover:bg-orange-500 normal-case text-white bg-orange-500 btn-sm text-base"
                                             onClick={() => {
                                                 window.my_modal_5.showModal()
                                                 setClassItem(item)
