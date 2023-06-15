@@ -33,7 +33,7 @@ const SignUp = () => {
                         .then(() => {
                             updateUserProfile(data.name, imgURL)
                                 .then(() => {
-                                    const saveUser = { name: data.name, email: data.email, role: 'student' }
+                                    const saveUser = { image: imgURL, name: data.name, email: data.email, role: 'student' }
                                     fetch('http://localhost:5000/users', {
                                         method: 'POST',
                                         headers: {

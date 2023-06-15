@@ -12,7 +12,6 @@ const Navbar = () => {
     const [isAdmin] = useAdmin();
     const [isInstructor] = useInstructor();
 
-
     const menuItems = <>
         <NavLink className={({ isActive }) => (isActive ? 'my-active' : 'px-4 py-1')} to="/">Home</NavLink>
         <NavLink className={({ isActive }) => (isActive ? 'my-active' : 'px-4 py-1')} to="/instructors">Instructors</NavLink>

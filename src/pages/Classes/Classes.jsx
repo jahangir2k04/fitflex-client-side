@@ -14,7 +14,7 @@ import 'react-toastify/dist/ReactToastify.css';
 const Classes = () => {
 
     const { user } = useContext(AuthContext);
-    const {classes, isLoading} = useClass();
+    const { classes, isLoading } = useClass();
     const [isAdmin] = useAdmin();
     const [isInstructor] = useInstructor();
     const navigate = useNavigate();
@@ -54,6 +54,10 @@ const Classes = () => {
 
     return (
         <div className="max-w-7xl mx-auto">
+            <h3 className="my-6">
+                <span className="text-4xl font-bold">Our Classes</span>
+                <span className="ms-1 text-xl">{`(all)`}</span>
+            </h3>
             <div className="my-12  grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                 {
                     classes.map(item =>
