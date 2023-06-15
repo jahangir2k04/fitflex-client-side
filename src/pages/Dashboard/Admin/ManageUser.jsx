@@ -45,12 +45,12 @@ const ManageUser = () => {
                         {/* head */}
                         <thead>
                             <tr>
-                                <th className="bg-orange-200 text-lg">#</th>
-                                <th className="bg-orange-200 text-lg">Name</th>
-                                <th className="bg-orange-200 text-lg">Email</th>
-                                <th className="bg-orange-200 text-lg">Role</th>
-                                <th className="bg-orange-200 text-lg">Action</th>
-                                <th className="bg-orange-200 text-lg">Action</th>
+                                <th className="bg-red-200 text-lg">#</th>
+                                <th className="bg-red-200 text-lg">Name</th>
+                                <th className="bg-red-200 text-lg">Email</th>
+                                <th className="bg-red-200 text-lg">Role</th>
+                                <th className="bg-red-200 text-lg">Action</th>
+                                <th className="bg-red-200 text-lg">Action</th>
                             </tr>
                         </thead>
                         <tbody>
