@@ -78,7 +78,9 @@ const CheckoutForm = ({selectedClass}) => {
         if(paymentIntent.status === 'succeeded'){
             const payment = {
                 email: user?.email,
+                image: selectedClass.image,
                 className: selectedClass.className,
+                instructorName: selectedClass.instructorName,
                 classId: selectedClass.classId,
                 transactionId: paymentIntent.id,
                 price: selectedClass.price,

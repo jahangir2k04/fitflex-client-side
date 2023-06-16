@@ -65,14 +65,14 @@ const SelectedClass = () => {
                             {
                                 selectedClasses.map((selectedClass, index) =>
                                     <tr key={selectedClass._id} className="hover">
-                                        <th>{index + 1}</th>
-                                        <th>
+                                        <td>{index + 1}</td>
+                                        <td>
                                             <div className="avatar">
                                                 <div className="mask mask-squircle w-14 h-14">
                                                     <img src={selectedClass.image} alt="Photo" />
                                                 </div>
                                             </div>
-                                        </th>
+                                        </td>
                                         <td>{selectedClass.className}</td>
                                         <td>{selectedClass.instructorName}</td>
                                         <td>${selectedClass.price}</td>
