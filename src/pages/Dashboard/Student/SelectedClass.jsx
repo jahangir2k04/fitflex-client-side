@@ -80,7 +80,7 @@ const SelectedClass = () => {
                                         <td>
                                             <Link to={`/dashboard/payment/${selectedClass._id}`}>
                                                 <button
-                                                    disabled={selectedClass.payment === 'success'}
+                                                    disabled={selectedClass.seats === 0}
                                                     className="btn w-full border-none hover:bg-orange-500 normal-case text-white bg-orange-500 btn-sm">
                                                     Pay
                                                 </button>

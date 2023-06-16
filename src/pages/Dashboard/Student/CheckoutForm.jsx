@@ -6,7 +6,7 @@ import Swal from "sweetalert2";
 
 
 
-const CheckoutForm = ({selectedClass}) => {
+const CheckoutForm = ({ selectedClass }) => {
 
     const stripe = useStripe();
     const elements = useElements();
@@ -14,7 +14,7 @@ const CheckoutForm = ({selectedClass}) => {
     const [axiosSecure] = useAxiosSecure();
     const [clientSecret, setClientSecret] = useState('');
     const [processing, setProcessing] = useState(false);
-    const {user} = useContext(AuthContext);
+    const { user } = useContext(AuthContext);
 
     const price = parseFloat(selectedClass?.price);
 
@@ -67,30 +67,23 @@ const CheckoutForm = ({selectedClass}) => {
             },
         );
 
-        if(confirmError){
+        if (confirmError) {
             setCardError(confirmError.message);
-        }else{
+        } else {
             setCardError('');
         }
 
         setProcessing(false);
 
-        if(paymentIntent.status === 'succeeded'){
+        if (paymentIntent.status === 'succeeded') {
+            const { image, className, instructorName, instructorEmail, classId, price, seats, enrolled } = selectedClass;
             const payment = {
-                email: user?.email,
-                image: selectedClass.image,
-                className: selectedClass.className,
-                instructorName: selectedClass.instructorName,
-                classId: selectedClass.classId,
-                transactionId: paymentIntent.id,
-                price: selectedClass.price,
-                date: new Date(),
-                payment: 'success'
+                email: user?.email, image, className, instructorName, instructorEmail, classId, transactionId: paymentIntent.id, price, seats, enrolled, date: new Date(), payment: 'success'
             };
 
             axiosSecure.post('/payments', payment)
                 .then(res => {
-                    if(res?.data?.insertResult?.insertedId){
+                    if (res?.data?.insertResult?.insertedId) {
                         Swal.fire(
                             'Good job!',
                             'Payment successfull!',
@@ -124,7 +117,7 @@ const CheckoutForm = ({selectedClass}) => {
                 />
                 <div className="text-center mt-16">
                     <button disabled={!stripe || !clientSecret || processing}
-                    className="btn bg-orange-500 hover:bg-orange-500 text-white tracking-widest text-lg w-1/3" type="submit" >
+                        className="btn bg-orange-500 hover:bg-orange-500 text-white tracking-widest text-lg w-1/3" type="submit" >
                         Pay
                     </button>
                 </div>

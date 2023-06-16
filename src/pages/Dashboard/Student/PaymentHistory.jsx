@@ -1,7 +1,8 @@
+import moment from "moment/moment";
 import useEnrolledClass from "../../../hooks/useEnrolledClass";
 
 
-const EnrolledClass = () => {
+const PaymentHistory = () => {
 
     const [enrolledClasses] = useEnrolledClass();
 
@@ -16,11 +17,11 @@ const EnrolledClass = () => {
                         <thead>
                             <tr>
                                 <th className="bg-red-200 text-lg">#</th>
-                                <th className="bg-red-200 text-lg">Image</th>
                                 <th className="bg-red-200 text-lg">Class Name</th>
-                                <th className="bg-red-200 text-lg">Instructor</th>
                                 <th className="bg-red-200 text-lg">Price</th>
                                 <th className="bg-red-200 text-lg">Payment</th>
+                                <th className="bg-red-200 text-lg">Transaction Id</th>
+                                <th className="bg-red-200 text-lg">Enroll Time</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -28,17 +29,11 @@ const EnrolledClass = () => {
                                 enrolledClasses.map((enrolledClass, index) =>
                                     <tr key={enrolledClass._id} className="hover">
                                         <td>{index + 1}</td>
-                                        <td>
-                                            <div className="avatar">
-                                                <div className="mask mask-squircle w-14 h-14">
-                                                    <img src={enrolledClass.image} alt="Photo" />
-                                                </div>
-                                            </div>
-                                        </td>
                                         <td>{enrolledClass.className}</td>
-                                        <td>{enrolledClass.instructorName}</td>
                                         <td>${enrolledClass.price}</td>
                                         <td>{enrolledClass.payment}</td>
+                                        <td>{enrolledClass.transactionId}</td>
+                                        <td>{moment(enrolledClass.date).format('LLL')}</td>
                                     </tr>)
                             }
                         </tbody>
@@ -49,4 +44,4 @@ const EnrolledClass = () => {
     );
 };
 
-export default EnrolledClass;
+export default PaymentHistory;
