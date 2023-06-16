@@ -1,23 +1,16 @@
-import { useQuery } from "@tanstack/react-query";
+// import { useQuery } from "@tanstack/react-query";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
-import { useContext } from "react";
-import { AuthContext } from "../../../providers/AuthProvider";
+// import { useContext } from "react";
+// import { AuthContext } from "../../../providers/AuthProvider";
 import Swal from "sweetalert2";
+import { Link } from "react-router-dom";
+import useSelectedClass from "../../../hooks/useSelectedClass";
 
 
 const SelectedClass = () => {
 
-    const { user } = useContext(AuthContext);
     const [axiosSecure] = useAxiosSecure();
-
-    const { data: selectedClasses = [], refetch } = useQuery({
-        queryKey: ['selected-class', user?.email ? user?.email : ''],
-        enabled: !!user?.email && !!localStorage.getItem("fitflex-access-token"),
-        queryFn: async () => {
-            const res = await axiosSecure(`/selected-class?email=${user?.email}`)
-            return res.data;
-        }
-    })
+    const [selectedClasses, refetch] = useSelectedClass();
 
     const handleDelete = selectedClass => {
         Swal.fire({
@@ -49,7 +42,7 @@ const SelectedClass = () => {
 
 
     return (
-        <div className="bg-base-200 h-full px-10 py-10">
+        <div className="bg-base-200 h-full p-10">
             <h3 className="mb-6 font-extrabold text-3xl text-center text-orange-500">Selected Classes</h3>
             <div className="bg-white p-10 mb-16">
                 <h3 className="text-2xl font-bold mb-5">Total Class: {selectedClasses.length}</h3>
@@ -63,6 +56,7 @@ const SelectedClass = () => {
                                 <th className="bg-red-200 text-lg">Class Name</th>
                                 <th className="bg-red-200 text-lg">Instructor</th>
                                 <th className="bg-red-200 text-lg">Price</th>
+                                <th className="bg-red-200 text-lg">Payment</th>
                                 <th className="bg-red-200 text-lg">Action</th>
                                 <th className="bg-red-200 text-lg">Action</th>
                             </tr>
@@ -82,15 +76,19 @@ const SelectedClass = () => {
                                         <td>{selectedClass.className}</td>
                                         <td>{selectedClass.instructorName}</td>
                                         <td>${selectedClass.price}</td>
+                                        <td>{selectedClass.payment}</td>
                                         <td>
-                                            <button
-                                                className="btn w-full border-none hover:bg-orange-500 normal-case text-white bg-orange-500 btn-sm">
-                                                Pay
-                                            </button>
+                                            <Link to={`/dashboard/payment/${selectedClass._id}`}>
+                                                <button
+                                                    disabled={selectedClass.payment === 'success'}
+                                                    className="btn w-full border-none hover:bg-orange-500 normal-case text-white bg-orange-500 btn-sm">
+                                                    Pay
+                                                </button>
+                                            </Link>
                                         </td>
                                         <td>
                                             <button
-                                            onClick={() => handleDelete(selectedClass)}
+                                                onClick={() => handleDelete(selectedClass)}
                                                 className="btn w-full border-none hover:bg-orange-500 normal-case text-white bg-orange-500 btn-sm">
                                                 Delete
                                             </button>

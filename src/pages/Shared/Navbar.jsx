@@ -4,6 +4,8 @@ import { useContext } from "react";
 import { AuthContext } from "../../providers/AuthProvider";
 import useAdmin from "../../hooks/useAdmin";
 import useInstructor from "../../hooks/useInstructor";
+import { FaShoppingCart } from "react-icons/fa";
+import useSelectedClass from "../../hooks/useSelectedClass";
 
 
 const Navbar = () => {
@@ -11,6 +13,7 @@ const Navbar = () => {
     const { user, logOut } = useContext(AuthContext);
     const [isAdmin] = useAdmin();
     const [isInstructor] = useInstructor();
+    const [selectedClass] = useSelectedClass();
 
     const menuItems = <>
         <NavLink className={({ isActive }) => (isActive ? 'my-active' : 'px-4 py-1')} to="/">Home</NavLink>
@@ -19,7 +22,7 @@ const Navbar = () => {
         {user &&
             <NavLink className={({ isActive }) => (isActive ? 'my-active' : 'px-4 py-1')}
                 to={isAdmin ?
-                        "/dashboard/admin-home" :
+                    "/dashboard/admin-home" :
                     isInstructor ?
                         "/dashboard/instructor-home" :
                         "/dashboard/student-home"
@@ -55,6 +58,12 @@ const Navbar = () => {
                     </ul>
                 </div>
                 <div className="navbar-end">
+                    <label className="btn btn-ghost btn-circle me-3">
+                        <div className="indicator">
+                            <FaShoppingCart className="text-2xl" />
+                            <span className="badge badge-sm indicator-item bg-orange-500 py-3 text-sm border-none text-white">+{selectedClass.length || 0}</span>
+                        </div>
+                    </label>
                     {user ?
                         <div onClick={handleLogOut}>
                             <Button text="Logout" style="font-semibold px-6  text-2xl"></Button>
@@ -64,6 +73,11 @@ const Navbar = () => {
                             <Button text="Login" style="font-semibold px-6  text-2xl"></Button>
                         </Link>
                     }
+                    <div className="avatar">
+                        <div className="w-14 rounded-full">
+                            <img src="" />
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

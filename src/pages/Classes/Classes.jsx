@@ -34,7 +34,7 @@ const Classes = () => {
 
         if (user && user?.email) {
             const { _id, className, image, instructorName, price } = item;
-            const selectedClass = { classId: _id, email: user.email, className, image, instructorName, price }
+            const selectedClass = { classId: _id, email: user.email, className, image, instructorName, price, payment: 'pending' }
             axiosSecure.post('/selected-class', selectedClass)
                 .then(data => {
                     if (data.data.insertedId) {
