@@ -64,6 +64,12 @@ const Navbar = () => {
                             <span className="badge badge-sm indicator-item bg-orange-500 py-3 text-sm border-none text-white">+{selectedClass.length || 0}</span>
                         </div>
                     </label>
+                    {user?.photoURL &&
+                        <div className="avatar me-2">
+                            <div className="w-12 rounded-full">
+                                <img src={user?.photoURL} />
+                            </div>
+                        </div>}
                     {user ?
                         <div onClick={handleLogOut}>
                             <Button text="Logout" style="font-semibold px-6  text-2xl"></Button>
@@ -73,11 +79,6 @@ const Navbar = () => {
                             <Button text="Login" style="font-semibold px-6  text-2xl"></Button>
                         </Link>
                     }
-                    <div className="avatar">
-                        <div className="w-14 rounded-full">
-                            <img src="" />
-                        </div>
-                    </div>
                 </div>
             </div>
         </div>

@@ -44,7 +44,6 @@ const AddClass = () => {
                 }
             })
 
-        console.log(data);
 
     }
 

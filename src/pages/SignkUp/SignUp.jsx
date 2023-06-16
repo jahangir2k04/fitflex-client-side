@@ -5,7 +5,7 @@ import SocialLogin from '../../components/SocialLogin';
 import { useForm } from 'react-hook-form';
 import { AuthContext } from '../../providers/AuthProvider';
 import Swal from 'sweetalert2';
-import { useContext } from 'react';
+import { useContext, useState } from 'react';
 
 
 const image_hosting_token = import.meta.env.VITE_Image_Upload_Token;
@@ -16,9 +16,10 @@ const SignUp = () => {
     const { register, handleSubmit, reset, watch, formState: { errors } } = useForm();
     const image_hosting_url = `https://api.imgbb.com/1/upload?key=${image_hosting_token}`
     const navigate = useNavigate();
+    const [signUpError, setSignUpError] = useState('');
 
     const onSubmit = (data) => {
-
+        setSignUpError('');
         const formData = new FormData();
         formData.append('image', data.photo[0]);
         fetch(image_hosting_url, {
@@ -52,9 +53,9 @@ const SignUp = () => {
                                             navigate('/');
                                         })
                                 })
-                                .catch(() => { })
+                                .catch(error => {setSignUpError(error.message) })
                         })
-                        .catch(() => { })
+                        .catch(error => {setSignUpError(error.message) })
                 }
             })
 
@@ -143,6 +144,7 @@ const SignUp = () => {
                             <input className="btn w-full bg-orange-500 hover:bg-orange-500 text-white tracking-wider text-xl normal-case" type="submit" value="Sign Up" />
                         </div>
                     </form>
+                    <p className='text-red-600'>{signUpError}</p>
                     <SocialLogin></SocialLogin>
                     <p className='text-center'><span>Already Have An Account? </span> <Link to="/login" className='font-extrabold text-xl text-orange-500'>Login</Link></p>
                 </div>

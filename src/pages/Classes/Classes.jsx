@@ -9,17 +9,21 @@ import { AuthContext } from "../../providers/AuthProvider";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import useSelectedClass from "../../hooks/useSelectedClass";
 
 
 const Classes = () => {
 
     const { user } = useContext(AuthContext);
-    const { classes, isLoading } = useClass();
+    const { allClasses, isLoading } = useClass();
     const [isAdmin] = useAdmin();
     const [isInstructor] = useInstructor();
     const navigate = useNavigate();
     const [axiosSecure] = useAxiosSecure();
     const [disabledButtons, setDisabledButtons] = useState([]);
+    const [ , refetch] = useSelectedClass();
+
+    const approvedClasses = allClasses.filter(eachClass => eachClass.status === 'approved');
 
 
     const handleSelectClass = (item) => {
@@ -38,6 +42,7 @@ const Classes = () => {
             axiosSecure.post('/selected-class', selectedClass)
                 .then(data => {
                     if (data.data.insertedId) {
+                        refetch();
                         setDisabledButtons((prevDisabledButtons) => [...prevDisabledButtons, _id]);
                         toast.success('Class selected successfully')
                     }
@@ -60,7 +65,7 @@ const Classes = () => {
             </h3>
             <div className="my-12  grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                 {
-                    classes.map(item =>
+                    approvedClasses.map(item =>
 
                         <div key={item._id} className="mx-auto w-[330px] bg-base-100 shadow-xl">
                             <figure><img className="h-52 w-full" src={item.image} alt="Photo" /></figure>

@@ -10,12 +10,12 @@ const ManageClass = () => {
     const [axiosSecure] = useAxiosSecure();
     const [classItem, setClassItem] = useState({});
 
-    // const { data: classes = [], refetch } = useQuery(['classes'], async () => {
-    //     const res = await axiosSecure.get('/classes');
+    // const { data: allClasses = [], refetch } = useQuery(['all-classes'], async () => {
+    //     const res = await axiosSecure.get('/all-classes');
     //     return res.data;
     // })
 
-    const [classes, refetch, isLoading] = useClass();
+    const {allClasses, refetch, isLoading} = useClass();
 
     const handleStatus = (item, status) => {
         axiosSecure.patch(`/classes/status/${item._id}`, { status })
@@ -62,10 +62,10 @@ const ManageClass = () => {
         <div className=" h-full px-6 py-10">
             <h3 className="mb-6 font-extrabold text-3xl text-center text-orange-500">Manage Class</h3>
             <div className="mb-16">
-                <h3 className="text-2xl font-bold ms-4 mb-5">Total Class: {classes.length}</h3>
+                <h3 className="text-2xl font-bold ms-4 mb-5">Total Class: {allClasses.length}</h3>
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                     {
-                        classes.map(item =>
+                        allClasses.map(item =>
 
                             <div key={item._id} className="w-80 bg-base-100 shadow-xl">
                                 <figure><img className="h-48 w-full" src={item.image} alt="Photo" /></figure>

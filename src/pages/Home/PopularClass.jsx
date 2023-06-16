@@ -9,12 +9,12 @@ const PopularClass = () => {
     })
 
     return (
-        <div className="max-w-7xl mx-auto">
+        <div className="max-w-7xl mx-auto mb-16">
             <h3 className="mb-8">
-                <span className="text-4xl font-bold">Our Instructors</span>
-                <span className="ms-1 text-xl">{`(all)`}</span>
+                <span className="text-4xl font-bold">Popular Classes</span>
+                <span className="ms-1 text-xl">{`(top 6)`}</span>
             </h3>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 ">
                 {
                     popularClasses.map(popularClass =>
 
