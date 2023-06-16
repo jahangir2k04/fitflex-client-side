@@ -11,6 +11,7 @@ const PopularInstructor = () => {
 
     return (
         <div className="max-w-7xl mx-auto mb-16">
+            
             <h3 className="mb-8">
                 <span className="text-4xl font-bold">Popular Instructors</span>
                 <span className="ms-1 text-xl">{`(top 6)`}</span>

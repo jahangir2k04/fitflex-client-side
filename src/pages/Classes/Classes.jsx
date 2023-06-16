@@ -10,6 +10,7 @@ import useAxiosSecure from "../../hooks/useAxiosSecure";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import useSelectedClass from "../../hooks/useSelectedClass";
+import { motion } from 'framer-motion';
 
 
 const Classes = () => {
@@ -21,7 +22,7 @@ const Classes = () => {
     const navigate = useNavigate();
     const [axiosSecure] = useAxiosSecure();
     const [disabledButtons, setDisabledButtons] = useState([]);
-    const [ , refetch] = useSelectedClass();
+    const [, refetch] = useSelectedClass();
 
     const approvedClasses = allClasses.filter(eachClass => eachClass.status === 'approved');
 
@@ -57,6 +58,17 @@ const Classes = () => {
         return <Loader></Loader>
     }
 
+    const hoverVariants = {
+        hover: {
+            scale: 1.03,
+            boxShadow: '0 0 10px rgba(0, 0, 0, 0.25)',
+        },
+        initial: {
+            scale: 1,
+            boxShadow: '0 0 0 rgba(0, 0, 0, 0)',
+        },
+    };
+
     return (
         <div className="max-w-7xl mx-auto">
             <h3 className="my-6">
@@ -67,7 +79,12 @@ const Classes = () => {
                 {
                     approvedClasses.map(item =>
 
-                        <div key={item._id} className="mx-auto w-[330px] bg-base-100 shadow-xl">
+                        <motion.div
+                            key={item._id}
+                            variants={hoverVariants}
+                            whileHover="hover"
+                            initial="initial"
+                            className="mx-auto w-[330px] bg-base-100 shadow-xl">
                             <figure><img className="h-52 w-full" src={item.image} alt="Photo" /></figure>
                             <div className={item.seats === 0 ? "card-body bg-red-200" : "card-body"}>
                                 <h2 className="card-title">{item.className}</h2>
@@ -80,7 +97,7 @@ const Classes = () => {
                                     className="btn mt-4 border-none rounded-none hover:bg-orange-500 normal-case text-white bg-orange-500 text-lg tracking-wider"
                                 >{disabledButtons.includes(item._id) ? "Selected" : "Select Now"}</button>
                             </div>
-                        </div>)
+                        </motion.div>)
                 }
             </div>
             <ToastContainer autoClose={2000} />
