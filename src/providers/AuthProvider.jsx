@@ -43,7 +43,7 @@ const AuthProvider = ({ children }) => {
 
             // get and set token
             if (currentUser) {
-                axios.post('http://localhost:5000/jwt', { email: currentUser.email })
+                axios.post('https://b7a12-summer-camp-server-side-jahangir2k04.vercel.app/jwt', { email: currentUser.email })
                     .then(data => {
                         localStorage.setItem('fitflex-access-token', data.data.token);
                         setLoading(false);

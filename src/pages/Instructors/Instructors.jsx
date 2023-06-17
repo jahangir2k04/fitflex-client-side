@@ -4,7 +4,7 @@ import { useQuery } from "@tanstack/react-query";
 const Instructors = () => {
 
     const { data: allInstructors = [] } = useQuery(['all-instructor'], async () => {
-        const res = await fetch('http://localhost:5000/all-instructor');
+        const res = await fetch('https://b7a12-summer-camp-server-side-jahangir2k04.vercel.app/all-instructor');
         return res.json();
     })
 
