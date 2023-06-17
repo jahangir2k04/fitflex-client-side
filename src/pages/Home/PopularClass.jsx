@@ -4,7 +4,7 @@ import { useQuery } from "@tanstack/react-query";
 const PopularClass = () => {
 
     const { data: popularClasses = [] } = useQuery(['popular-classes'], async () => {
-        const res = await fetch('https://b7a12-summer-camp-server-side-jahangir2k04.vercel.app/popular-classes');
+        const res = await fetch('http://localhost:5000/popular-classes');
         return res.json();
     })
 

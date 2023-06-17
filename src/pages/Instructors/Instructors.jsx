@@ -4,7 +4,7 @@ import { useQuery } from "@tanstack/react-query";
 const Instructors = () => {
 
     const { data: allInstructors = [] } = useQuery(['all-instructor'], async () => {
-        const res = await fetch('https://b7a12-summer-camp-server-side-jahangir2k04.vercel.app/all-instructor');
+        const res = await fetch('http://localhost:5000/all-instructor');
         return res.json();
     })
 
@@ -23,6 +23,7 @@ const Instructors = () => {
                             <div className="card-body p-5">
                                 <h2 className="card-title">{instructor.name}</h2>
                                 <h2>Email: {instructor.email}</h2>
+                                <p className="mb-4">Total Student: {instructor?.totalStudent || 0}</p>
                             </div>
                         </div>)
                 }

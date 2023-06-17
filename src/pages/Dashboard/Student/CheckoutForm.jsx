@@ -6,7 +6,7 @@ import Swal from "sweetalert2";
 
 
 
-const CheckoutForm = ({ selectedClass }) => {
+const CheckoutForm = ({ selectedClass, refetch }) => {
 
     const stripe = useStripe();
     const elements = useElements();
@@ -84,6 +84,7 @@ const CheckoutForm = ({ selectedClass }) => {
             axiosSecure.post('/payments', payment)
                 .then(res => {
                     if (res?.data?.insertResult?.insertedId) {
+                        refetch();
                         Swal.fire(
                             'Good job!',
                             'Payment successfull!',

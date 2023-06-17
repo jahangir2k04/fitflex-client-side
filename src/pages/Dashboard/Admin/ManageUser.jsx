@@ -13,7 +13,7 @@ const ManageUser = () => {
     })
 
     const handleAdminOrInstructor = (user, role) => {
-        fetch(`https://b7a12-summer-camp-server-side-jahangir2k04.vercel.app/users/admin/${user._id}`, {
+        fetch(`http://localhost:5000/users/admin/${user._id}`, {
             method: 'PATCH',
             headers: {
                 'Content-Type': 'application/json'

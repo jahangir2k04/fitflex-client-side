@@ -9,7 +9,7 @@ import { useParams } from "react-router-dom";
 const stripePromise = loadStripe(import.meta.env.VITE_Payment_Gateway_PK);
 const Payment = () => {
 
-    const [selectedClasses] = useSelectedClass();
+    const [selectedClasses, refetch] = useSelectedClass();
     const { id } = useParams();
     const selectedClass = selectedClasses.find(cls => cls._id === id);
 
@@ -19,7 +19,7 @@ const Payment = () => {
             <div className="bg-white px-40 py-24 mb-16">
 
                 <Elements stripe={stripePromise}>
-                    <CheckoutForm selectedClass={selectedClass}></CheckoutForm>
+                    <CheckoutForm refetch={refetch} selectedClass={selectedClass}></CheckoutForm>
                 </Elements>
 
             </div>

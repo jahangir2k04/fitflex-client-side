@@ -62,10 +62,18 @@ const Classes = () => {
         hover: {
             scale: 1.03,
             boxShadow: '0 0 10px rgba(0, 0, 0, 0.25)',
+            transition: {
+                duration: 0.7, 
+                ease: 'easeOut', 
+              },
         },
         initial: {
             scale: 1,
             boxShadow: '0 0 0 rgba(0, 0, 0, 0)',
+            transition: {
+                duration: 0.7, 
+                ease: 'easeI', 
+              },
         },
     };
 

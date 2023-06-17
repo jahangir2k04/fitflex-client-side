@@ -1,4 +1,4 @@
-import { Link, NavLink } from "react-router-dom";
+import { Link, NavLink, useNavigate } from "react-router-dom";
 import Button from "../../components/Button";
 import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../../providers/AuthProvider";
@@ -14,6 +14,7 @@ const Navbar = () => {
     const [isAdmin] = useAdmin();
     const [isInstructor] = useInstructor();
     const [selectedClass] = useSelectedClass();
+    const navigate = useNavigate();
 
     const menuItems = <>
         <NavLink className={({ isActive }) => (isActive ? 'my-active' : 'px-4 py-1')} to="/">Home</NavLink>
@@ -31,7 +32,7 @@ const Navbar = () => {
 
     const handleLogOut = () => {
         logOut()
-            .then(() => { })
+            .then(() => { navigate('/') })
             .catch(() => { })
     }
 
