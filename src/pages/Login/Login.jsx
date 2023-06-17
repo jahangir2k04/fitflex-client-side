@@ -67,7 +67,7 @@ const Login = () => {
                         </div>
 
                         <div className="form-control mt-6">
-                            <input className="btn bg-orange-500 hover:bg-orange-500 text-white tracking-wider text-xl normal-case" type="submit" value="Login" />
+                            <input className="btn border-none bg-orange-500 hover:bg-orange-500 text-white tracking-wider text-xl normal-case" type="submit" value="Login" />
                         </div>
                         <p className='text-red-600'>{error}</p>
                     </form>

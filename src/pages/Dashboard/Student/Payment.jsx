@@ -16,7 +16,7 @@ const Payment = () => {
     return (
         <div className="bg-base-200 h-full px-20 py-10">
             <h3 className="mb-10 font-extrabold text-3xl text-center text-orange-500">Please process payment!</h3>
-            <div className="bg-white p-10 mb-16">
+            <div className="bg-white px-40 py-24 mb-16">
 
                 <Elements stripe={stripePromise}>
                     <CheckoutForm selectedClass={selectedClass}></CheckoutForm>
