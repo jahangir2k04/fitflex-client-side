@@ -1,6 +1,7 @@
 ﻿# FitFlex  <sub><sup>( MERN project )
 This is a online based physical exercise platform . Where user can chose a class and exercise regularly for better fitness and healthy life.
 * **live link:** https://fitflex-5aa87.web.app/
+* **Server side:** https://github.com/jahangir2k04/fitflex-server-side
 # Features :
 
 ## For Users: 
